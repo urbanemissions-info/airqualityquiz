@@ -9,48 +9,102 @@ function App() {
 
   const questions = [
     {
-      text: "What is the capital of America?",
+      text: "What is Particulate Matter (PM) 2.5?",
       options: [
-        { id: 0, text: "New York City", isCorrect: false },
-        { id: 1, text: "Boston", isCorrect: false },
-        { id: 2, text: "Santa Fe", isCorrect: false },
-        { id: 3, text: "Washington DC", isCorrect: true },
+        { id: 0, text: "All PM with radius less than 2.5 µm", isCorrect: false },
+        { id: 1, text: "All PM with radius less than 2.5 mm", isCorrect: false },
+        { id: 2, text: "All PM with diameter less than 2.5 µm", isCorrect: true },
+        { id: 3, text: "All PM with diameter less than 2.5 mm", isCorrect: false },
       ],
     },
+
     {
-      text: "What year was the Constitution of America written?",
+      text: "What is the main ingredient of the acid rain?",
       options: [
-        { id: 0, text: "1787", isCorrect: true },
-        { id: 1, text: "1776", isCorrect: false },
-        { id: 2, text: "1774", isCorrect: false },
-        { id: 3, text: "1826", isCorrect: false },
+        { id: 0, text: "Nitrogen dioxide (NO2)", isCorrect: false },
+        { id: 1, text: "Sulphuric acid (H2SO4)", isCorrect: false },
+        { id: 2, text: "Carbon Monoxide (CO)", isCorrect: false },
+        { id: 3, text: "Sulphur dioxide (SO2)", isCorrect: true },
       ],
     },
+
     {
-      text: "Who was the second president of the US?",
+      text: "Which of the following is not a necessary ingredient in the production of Tropospheric Ozone?",
       options: [
-        { id: 0, text: "John Adams", isCorrect: true },
-        { id: 1, text: "Paul Revere", isCorrect: false },
-        { id: 2, text: "Thomas Jefferson", isCorrect: false },
-        { id: 3, text: "Benjamin Franklin", isCorrect: false },
+        { id: 0, text: "Nitrogen Oxides (NOx)", isCorrect: false },
+        { id: 1, text: "Carbon dioxide (CO2)", isCorrect: true },
+        { id: 2, text: "Volatile Organic Compounds (VOCs)", isCorrect: false },
+        { id: 3, text: "Sunlight", isCorrect: false },
       ],
     },
+
     {
-      text: "What is the largest state in the US?",
+      text: "Which of the following pollutants can exist in both gas and aerosol phases?",
       options: [
-        { id: 0, text: "California", isCorrect: false },
-        { id: 1, text: "Alaska", isCorrect: true },
-        { id: 2, text: "Texas", isCorrect: false },
-        { id: 3, text: "Montana", isCorrect: false },
+        { id: 0, text: "Particulate Matter (PM 2.5)", isCorrect: false },
+        { id: 1, text: "Sulphur Dioxide (SO2)", isCorrect: true },
+        { id: 2, text: "Ozone (O3)", isCorrect: false },
+        { id: 3, text: "Carbon Monoxide (CO)", isCorrect: false },
       ],
     },
+
     {
-      text: "Which of the following countries DO NOT border the US?",
+      text: "What is the unit of Air Quality Index (AQI) ?",
       options: [
-        { id: 0, text: "Canada", isCorrect: false },
-        { id: 1, text: "Russia", isCorrect: true },
-        { id: 2, text: "Cuba", isCorrect: true },
-        { id: 3, text: "Mexico", isCorrect: false },
+        { id: 0, text: "Parts per million (ppm)", isCorrect: false },
+        { id: 1, text: "Micrograms (µg)", isCorrect: false },
+        { id: 2, text: "Micrograms per unit volumen (µg/m3)", isCorrect: false },
+        { id: 3, text: "None", isCorrect: true },
+      ],
+    },
+
+    {
+      text: "What AQI value is considered 'Good' in India?",
+      options: [
+        { id: 0, text: "0-10", isCorrect: false },
+        { id: 1, text: "50-100", isCorrect: false },
+        { id: 2, text: "0-25", isCorrect: false },
+        { id: 3, text: "0-50", isCorrect: true },
+      ],
+    },
+
+    {
+      text: "What is the fundamental equation in building an Emissions Inventory?",
+      options: [
+        { id: 0, text: "Activity * Emissions Factor", isCorrect: true },
+        { id: 1, text: "Activity / Emissions Factor", isCorrect: false },
+        { id: 2, text: "Emissions Factor / Activity", isCorrect: false },
+        { id: 3, text: "Activity + Emissions Factor", isCorrect: false },
+      ],
+    },
+    
+    {
+      text: "What is the representative area of an air quality monitor?",
+      options: [
+        { id: 0, text: "10 sq.km", isCorrect: false },
+        { id: 1, text: "4 sq.km", isCorrect: true },
+        { id: 2, text: "2 sq.km", isCorrect: false },
+        { id: 3, text: "20 sq.km", isCorrect: false },
+      ],
+    },
+
+    {
+      text: "What does source apportionment study aim to determine?",
+      options: [
+        { id: 0, text: "When the pollution occurred", isCorrect: false },
+        { id: 1, text: "The geographical location of pollution", isCorrect: false },
+        { id: 2, text: "What all activities contributed to the air pollution", isCorrect: true },
+        { id: 3, text: "The composition of pollutants", isCorrect: false },
+      ],
+    },
+
+    {
+      text: "What action is recommended when idling in traffic for more than 30 seconds??",
+      options: [
+        { id: 0, text: "Keep the engine running to avoid restart, which causes more pollution.", isCorrect: false },
+        { id: 1, text: "Reduce air conditioning", isCorrect: false },
+        { id: 2, text: "Turn off the engine", isCorrect: true },
+        { id: 3, text: "Put the vehicle on a Neutral gear", isCorrect: false },
       ],
     },
   ];
@@ -81,7 +135,7 @@ function App() {
   return (
     <div className="App">
       {/* 1. Header  */}
-      <h1>USA Quiz 🇺🇸</h1>
+      <h1>Air Quality Quiz</h1>
 
       {/* 2. Current Score  */}
       <h2>Score: {score}</h2>

@@ -11,7 +11,7 @@
   height: auto;
 
   /* Visual  */
-  background-color: gray;
+  background-color: rgb(23, 81,18);
   padding: 16px;
   border-radius: 16px;
   color: white;
@@ -25,15 +25,16 @@ ul {
 
 li {
   margin-top: 8px;
-  background-color: darkgray;
+  background-color: rgba(255, 255, 255, 0.86);
   padding: 16px;
-  border: 3px solid white;
+  border: 3px solid rgb(0, 0, 0);
   border-radius: 20px;
   font-size: 20px;
+  color: black;
 }
 
 .question-text {
-  color: darkblue;
+  color: rgb(255, 255, 255);
   font-size: 24px;
 }
 
