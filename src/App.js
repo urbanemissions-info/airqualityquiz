@@ -22,12 +22,12 @@ function App() {
 
     {
       id: 2,
-      text: "What is the main ingredient of the acid rain?",
+      text: "Which gas is responsible for acid rain?",
       options: [
-        { id: 0, text: "Nitrogen dioxide (NO2)", isCorrect: false },
+        { id: 0, text: "Ozone (O3)", isCorrect: false },
         { id: 1, text: "Carbon Dioxide (CO2)", isCorrect: false },
         { id: 2, text: "Carbon Monoxide (CO)", isCorrect: false },
-        { id: 3, text: "Sulphur dioxide (SO2)", isCorrect: true },
+        { id: 3, text: "Sulphur Dioxide (SO2)", isCorrect: true },
       ],
     },
 
