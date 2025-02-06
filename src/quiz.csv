@@ -1,3 +1,25 @@
-id,text,a,b,c,d,correct_option
+question_id,text,option_a,option_b,option_c,option_d,correct_ans
 1,What is Particulate Matter (PM) 2.5?,All PM with radius less than 2.5 µm,All PM with radius less than 2.5 mm,All PM with diameter less than 2.5 µm,All PM with diameter less than 2.5 mm,c
-2,What is the main ingredient of the acid rain?,Nitrogen dioxide (NO2),Carbon Dioxide (CO2),Carbon Monoxide (CO),Sulphur dioxide (SO2),d
+2,Which gas is responsible for acid rain?,Ozone (O3),Carbon Dioxide (CO2),Carbon Monoxide (CO),Sulphur Dioxide (SO2),d
+3,Which of the following is not a necessary ingredient in the production of 'Global' Tropospheric Ozone?,Nitrogen Oxides (NOx),Carbon dioxide (CO2),Volatile Organic Compounds (VOCs),Sunlight,b
+4,Which of the following gaseous pollutants can directly contribute to aerosol concentrations?,Particulate Matter (PM 2.5),Sulphur Dioxide (SO2),Ozone (O3),Carbon Monoxide (CO),b
+5,What is the unit of Air Quality Index (AQI) ?,Parts per million (ppm),Micrograms (µg),Micrograms per unit volume (µg/m3),None,d
+6,What is the fundamental equation in building an Emissions Inventory?,Activity * Emissions Factor,Activity / Emissions Factor,Emissions Factor / Activity,Activity + Emissions Factor,a
+7,What is the representative area of an air quality monitor?,Area with a radius of 1 km,Area with a radius of 2 km,Area with a radius of 4 km,Area with a radius of 10 km,b
+8,What does source apportionment study aim to determine?,When the pollution occurred,The geographical location of pollution,What all activities contributed to the air pollution,The chemical composition of pollutants,c
+9,What action is recommended when idling in traffic for more than 30 seconds?,"Keep the engine running to avoid restart, which causes more pollution",Reduce air conditioning,Turn off the engine,Put the vehicle on a Neutral gear,c
+10,Main pollutant of volcanic eruptions is?,Nitrogen Dioxide (NO2),Sulphur Dioxide (SO2),Ozone (O3),Volatile Organic Compounds (VOCs),b
+11,Pollutant that gets attached to blood (haemoglobin) and leads to premature mortality?,Nitrogen Dioxide (NO2),Benzene (C6H6),Ozone (O3),Carbon Monoxide (CO),d
+12,Lightning produces this pollutant in large quantities?,Nitrogen oxides (NOx),Halogen compounds,Ozone (O3),Volatile Organic Compounds (VOCs),a
+13,Pollutant concentrations most used for calculating health impacts?,Sulphur Dioxide (SO2) and Nitrogen Dioxide (NO2),Particulate Matter 2.5 (PM2.5) and Ozone (O3),Nitrogen Dioxide (NO2) and Particulate Matter 2.5 (PM2.5),"NO2, Benzene (C6H6) and Ozone (O3)",b
+14,Good ozone protecting us from UV radiation resides in?,Troposphere,Heliosphere,Mesosphere,Stratosphere,d
+15,Chronic Obstructive Pulmonary Disorder (COPD) is associated with?,Heart,Lungs,Eyes,Veins,b
+16,Ultrafine particulates are Particulate Matter (PM) less than?,10μm,1μm,0.1μm,0.01μm,c
+17,Ambient air pollution sources are?,Everything that burns,mostly power plants,mostly transport,waste burning,a
+18,Which of the following statements is TRUE,Air quality index provides more information than air quality data,Air quality index information is preferred for regulatory purposes,Air quality index information is preferred for public awareness,Air quality index value is same as PM2.5 concentration value,c
+19,Which of the following statements is TRUE,Discussions on pollution is same as discussions on concentrations,Discussions on emissions is same as discussions on pollution,Discussions on emissions is same as discussions on air quality index,Discussions on pollutants is same as discussions on air quality index,a
+20,Which of the following statements is TRUE,Two monitoring stations is a good sample to represent a city,Low-cost sensors are same as regulatory-grade monitoring systems,Regulatory-grade systems do not require any maintenance,All monitoring systems require regular maintenance and calibration,d
+21,Which of the following statements is TRUE,Satellite observations can directly replace ground measurements,Satellite observations are superior to ground measurements,Satellite observations are a proxy to ground measurements,Satellite observations are a proxy to emission inventories,c
+22,What is TRUE about Aerosol Optical Depth (AOD)?,AOD is a proxy of PM2.5 or PM10 concentrations in the air,AOD from satellites is same as PM2.5/PM10 from ground measurements,AOD can be used for policy discussions globally,AOD from a single satellite pass per day is enough to deduce pollution,a
+23,Best way to reduce pollution,Increase the number of monitoring stations,Control emissions at all the sources,Use vacuum cleaners to suck pollution in the air,All the above,b
+24,Which of the following statements is TRUE about source apportionment techniques,Sampling-chemical-analysis approach is always preferred,Sampling-chemical-analysis approach is the best,Emissions-pollution-modelling approach is always preferred,Emissions-pollution-modelling approach has better spatial and temporal coverage,d

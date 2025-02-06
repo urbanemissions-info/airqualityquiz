@@ -1,20 +1,19 @@
 # Multiple Choice Quiz (ReactJS)
 
-<img width="500" alt="Screen Shot 2022-01-19 at 6 19 13 PM" src="https://user-images.githubusercontent.com/36372968/150233909-40f43663-f001-4315-b7ea-970bf54a9a73.png">
+Answer the quiz on: [AirQualityQuiz](https://urbanemissions-info.github.io/airqualityquiz/)
 
-<img width="400" alt="Screen Shot 2022-01-19 at 6 19 32 PM" src="https://user-images.githubusercontent.com/36372968/150233956-8550e069-05e2-4bcd-bf23-270cad6cc590.png">
+![alt text](image.png)
 
 ## Deploy on GH pages
 [Video tutorial](https://www.youtube.com/watch?v=7wzuievFjrk)
 
 
-# 
 ## Improvements
 
 ### Easy 🟢 
-- **Visual updates**: Animations, Sounds, Font Styling, Background, Colors, etc.
-- Store list of questions in a seperate file - `questions.txt`
-- Change list of questions to something else
+- [ ]**Visual updates**: Animations, Sounds, Font Styling, Background, Colors, etc.
+- [x] Store list of questions in a seperate file - `questions.csv`
+- [ ] Place `questions.csv` on Google Sheets and serve it from there.
 
 ### Medium 🟡
 
