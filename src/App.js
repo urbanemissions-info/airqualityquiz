@@ -7,7 +7,6 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  const [begin_shuffle, setBeginShuffle] = useState(true);
 
   function csvToQuestions(csvString) {
     const lines = csvString.trim().split("\n");
@@ -59,8 +58,9 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [questionsWithRandomIds, setQuestionsWithRandomIds] = useState(questions);
 
+  const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzzNg3HDQK3vUKpEnIwOREwa-SeRIcfYoECkL1qwivnChSUy5xrI7vE8Gpipuo_TxX6YDerL97rfGG/pub?gid=0&single=true&output=csv";
   function loadquotesCSV() {
-    fetch(csv, {
+    fetch(GOOGLE_SHEET_CSV_URL, {
       headers: { "content-type": "text/csv;charset=UTF-8" },
       method: "GET",
     })
@@ -111,57 +111,53 @@ function App() {
     setQuestionsWithRandomIds(questions);
   };
 
-  if (begin_shuffle) {
-    restartGame();
-    setBeginShuffle(false);
-  }
+  // if (begin_shuffle) {
+  //   restartGame();
+  //   setBeginShuffle(false);
+  // }
 
   return (
     <div className="App">
-      {/* 1. Header  */}
+      {/* 1. Header */}
       <h1>Air Quality Quiz</h1>
-
-      {/* 2. Current Score  */}
-      <h2>Score: {score}</h2>
-
-      {/* 3. Show results or show the question game  */}
-      {showResults ? (
-        /* 4. Final Results */
-        <div className="final-results">
-          <h1>Final Results</h1>
-          <h2>
-            {score} out of {questionsWithRandomIds.length} correct - (
-            {(score / questionsWithRandomIds.length) * 100}%)
-          </h2>
-          <button onClick={() => restartGame()}>Restart game</button>
-        </div>
+  
+      {/* Show loading message if questions are not yet loaded */}
+      {questions.length === 0 ? (
+        <h2>Loading quiz...</h2>
       ) : (
-        /* 5. Question Card  */
-
-        <div className="question-card">
-          {/* Current Question  */}
-          <h2>
-            Question: {currentQuestion + 1} out of{" "}
-            {questionsWithRandomIds.length}
-          </h2>
-          <h3 className="question-text">
-            {questionsWithRandomIds[currentQuestion]?.text}
-          </h3>
-
-          {/* List of possible answers  */}
-          <ul>
-            {questionsWithRandomIds[currentQuestion]?.options.map((option) => {
-              return (
-                <li
-                  key={option.id}
-                  onClick={() => optionClicked(option.isCorrect)}
-                >
-                  {option.text}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <>
+          {/* 2. Current Score */}
+          <h2>Score: {score}</h2>
+  
+          {/* 3. Show results or show the question game */}
+          {showResults ? (
+            /* 4. Final Results */
+            <div className="final-results">
+              <h1>Final Results</h1>
+              <h2>
+                {score} out of {questionsWithRandomIds.length} correct - (
+                {(score / questionsWithRandomIds.length) * 100}%)
+              </h2>
+              <button onClick={() => restartGame()}>Restart game</button>
+            </div>
+          ) : (
+            /* 5. Question Card */
+            <div className="question-card">
+              <h2>
+                Question: {currentQuestion + 1} out of {questionsWithRandomIds.length}
+              </h2>
+              <h3 className="question-text">{questionsWithRandomIds[currentQuestion]?.text}</h3>
+  
+              <ul>
+                {questionsWithRandomIds[currentQuestion]?.options.map((option) => (
+                  <li key={option.id} onClick={() => optionClicked(option.isCorrect)}>
+                    {option.text}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

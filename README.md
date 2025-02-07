@@ -13,7 +13,7 @@ Answer the quiz on: [AirQualityQuiz](https://urbanemissions-info.github.io/airqu
 ### Easy 🟢 
 - [ ]**Visual updates**: Animations, Sounds, Font Styling, Background, Colors, etc.
 - [x] Store list of questions in a seperate file - `questions.csv`
-- [ ] Place `questions.csv` on Google Sheets and serve it from there.
+- [x] Place `questions.csv` on Google Sheets and serve it from there // add 'Loading quiz' for lag.
 
 ### Medium 🟡
 
