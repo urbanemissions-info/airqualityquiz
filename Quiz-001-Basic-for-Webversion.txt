@@ -1,0 +1,167 @@
+What is particulate matter (PM) 2.5?
+-- all PM under 2.5 mm radius
+-- all PM under 2.5 micro-m radius
+-- all PM under 2.5 mm diameter
+-- all PM under 2.5 micro-m diameter
+
+AQI standards for
+-- Air Quality Information
+-- Air Quality Index
+-- Air Quality Inventory
+-- Air Quality Impacts
+
+PM2.5 is a
+-- Primary pollutant
+-- Secondary pollutant
+-- Has both primary and secondary pollutants
+-- Don't know
+
+Global climate Change is same as air pollution we experience in the city's
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+SMOG is
+-- Suspended-PM and Fog
+-- Smoke and Fog
+-- Sulfur Dioxide and Fog
+-- Soot and Fog
+
+Air quality is same as Air Quality Index (AQI)
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Which pollutant is responsible for acid rain?
+-- Ammonia
+-- Carbon Monoxide
+-- Ozone
+-- Sulfur Dioxide
+
+Which of the following is not a necessary ingredient in the production of Ozone?
+-- Carbon Dioxide
+-- Nitrogen Oxides
+-- Sunlight
+-- Volatile Organic Compounds
+
+What is the unit of Air Quality Index (AQI)?
+-- micro-gm/m3
+-- none
+-- percentage (%)
+-- tons/year
+
+What is a typical unit of emissions?
+-- kg/day
+-- tons/year
+-- It depends
+-- A & B
+
+What is a typical unit of pollution?
+-- micro-gm/m3
+-- tons/year
+-- It depends
+-- A & B
+
+Pollutant that gets attached to blood (haemoglobin) and leads to premature mortality?
+-- Carbon Dioxide
+-- Carbon Monoxide
+-- Nitrogen Dioxide
+-- Ozone
+
+Good ozone protecting us from UV radiation, resides in?
+-- Biosphere
+-- Mesosphere
+-- Stratosphere
+-- Troposphere
+
+Bad ozone that we don't want to breathe, resides in?
+-- Biosphere
+-- Mesosphere
+-- Stratosphere
+-- Troposphere
+
+Chronic Obstructive Pulmonary Disorder (COPD) due to air pollution is associated with this organ
+-- Blood
+-- Heart
+-- Lungs
+-- Eyes
+
+Cardiac arrests due to air pollution is associated with this organ
+-- Blood
+-- Heart
+-- Lungs
+-- Eyes
+
+Ambient air pollution sources are?
+-- Everything that burns
+-- It depends on when and where
+-- Mostly biomass burning
+-- Mostly transport
+
+Air quality index (AQI) provides more information than air quality data
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Air quality index information is preferred for regulatory purposes
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Air quality index information is preferred for public awareness
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Air quality index value is same as PM2.5 concentration value
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Discussions on emissions is same as discussions on pollution
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Regulatory-grade monitoring systems do not require any maintenance
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+All monitoring systems require regular maintenance and calibration
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Satellite observations are superior to ground measurements
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Best way to reduce pollution
+-- Increase the number of monitoring stations
+-- Control emissions at all the sources
+-- Use vacuum cleaner like equipment to suck pollution in the air
+-- All the above
+
+Air Quality Index (AQI) methodology is same for all the countries
+-- True
+-- False
+-- Sometimes
+-- Don't know
+
+Monitoring data is enough to know everything about air pollution
+-- True
+-- False
+-- Sometimes
+-- Don't know

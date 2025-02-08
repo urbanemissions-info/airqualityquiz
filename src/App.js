@@ -1,66 +1,60 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import csv from "./quiz.csv";
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'; // Import necessary components
 
-function App() {
-  // Properties
-  const [showResults, setShowResults] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
+// Helper function to convert CSV to questions (shared by both quizzes)
+function csvToQuestions(csvString) {
+  const lines = csvString.trim().split("\n");
+  const headers = lines[0].split(",");
+  const questions = [];
 
-  function csvToQuestions(csvString) {
-    const lines = csvString.trim().split("\n");
-    const headers = lines[0].split(",");
-    const questions = [];
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(",");
+    const questionId = parseInt(values[0], 10);
+    const questionText = values[1];
+    const obj = { a: 2, b: 3, c: 4, d: 5 };
+    const correctAnswerIndex = obj[values[6].replace("\r", "")]; // Assuming 'correct_ans' is at index 6
 
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(",");
-      const questionId = parseInt(values[0], 10);
-      const questionText = values[1];
-      const obj = { a: 2, b: 3, c: 4, d: 5 };
-      const correctAnswerIndex = obj[values[6].replace("\r", "")]; // Assuming 'correct_ans' is at index 6
-
-      const options = [];
-      for (let j = 2; j <= 5; j++) {
-        options.push({
-          id: j - 2,
-          text: values[j],
-          isCorrect: j === correctAnswerIndex,
-        });
-      }
-
-      questions.push({
-        id: questionId,
-        text: questionText,
-        options: options,
+    const options = [];
+    for (let j = 2; j <= 5; j++) {
+      options.push({
+        id: j - 2,
+        text: values[j],
+        isCorrect: j === correctAnswerIndex,
       });
     }
 
-    // Shuffle the questions array once (using Fisher-Yates algorithm)
-    for (let i = questions.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
-
-    return questions;
+    questions.push({
+      id: questionId,
+      text: questionText,
+      options: options,
+    });
   }
 
-  // Example CSV input (as a string)
-  // const csvData = `question_id,text,option_0,option_1,option_2,option_3,correct_ans
-  // 1,What is Particulate Matter (PM) 2.5?,All PM with radius less than 2.5 µm,All PM with radius less than 2.5 mm,All PM with diameter less than 2.5 µm,All PM with diameter less than 2.5 mm,2
-  // 2,Which gas is responsible for acid rain?,Ozone (O3),Carbon Dioxide (CO2),Carbon Monoxide (CO),Sulphur Dioxide (SO2),3`;
-  // Read the CSV file
+  // Shuffle the questions array once (using Fisher-Yates algorithm)
+  for (let i = questions.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [questions[i], questions[j]] = [questions[j], questions[i]];
+  }
+
+  return questions.slice(0,10);
+}
+
+// Quiz Component (reusable)
+function Quiz({ googleSheetURL, quizTitle }) {
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResults, setShowResults] = useState(false);
+  // const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    loadquotesCSV();
-  }, []);
+    loadQuestions();
+  }, [googleSheetURL]); // Add googleSheetURL as a dependency
 
-  const [questions, setQuestions] = useState([]);
-  const [questionsWithRandomIds, setQuestionsWithRandomIds] = useState(questions);
-
-  const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzzNg3HDQK3vUKpEnIwOREwa-SeRIcfYoECkL1qwivnChSUy5xrI7vE8Gpipuo_TxX6YDerL97rfGG/pub?gid=0&single=true&output=csv";
-  function loadquotesCSV() {
-    fetch(GOOGLE_SHEET_CSV_URL, {
+  const loadQuestions = () => {
+    // setLoading(true); // Set loading to true before fetching
+    fetch(googleSheetURL, {
       headers: { "content-type": "text/csv;charset=UTF-8" },
       method: "GET",
     })
@@ -68,88 +62,63 @@ function App() {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        // console.log("CSV Data:", response.text());
         return response.text();
       })
       .then((csvData) => {
-        // console.log("CSV Data:", csvData);
         const data = csvToQuestions(csvData);
         setQuestions(data);
-        setQuestionsWithRandomIds(data);
-        // You can now process the CSV data as needed
+        // setLoading(false); // Set loading to false after successful fetch
       })
       .catch((error) => {
         console.error("Error fetching CSV file:", error);
+        // setLoading(false); // Set loading to false even if there's an error
       });
-  }
+  };
 
-  // Helper Functions
-  /* A possible answer was clicked */
   const optionClicked = (isCorrect) => {
-    // Increment the score
     if (isCorrect) {
       setScore(score + 1);
     }
 
-    if (currentQuestion + 1 < questionsWithRandomIds.length) {
+    if (currentQuestion + 1 < questions.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResults(true);
     }
   };
 
-  /* Resets the game back to default */
   const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
     setShowResults(false);
-    // Shuffle the questions array once (using Fisher-Yates algorithm)
-    for (let i = questions.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
-    setQuestionsWithRandomIds(questions);
+    loadQuestions(); // Reload questions to shuffle
   };
 
-  // if (begin_shuffle) {
-  //   restartGame();
-  //   setBeginShuffle(false);
-  // }
-
   return (
-    <div className="App">
-      {/* 1. Header */}
-      <h1>Air Quality Quiz</h1>
-  
-      {/* Show loading message if questions are not yet loaded */}
+    <div className="quiz-container"> {/* Add a class for styling */}
+      <h1>{quizTitle}</h1> {/* Display the quiz title */}
       {questions.length === 0 ? (
         <h2>Loading quiz...</h2>
       ) : (
         <>
-          {/* 2. Current Score */}
           <h2>Score: {score}</h2>
-  
-          {/* 3. Show results or show the question game */}
           {showResults ? (
-            /* 4. Final Results */
             <div className="final-results">
               <h1>Final Results</h1>
               <h2>
-                {score} out of {questionsWithRandomIds.length} correct - (
-                {(score / questionsWithRandomIds.length) * 100}%)
+                {score} out of {questions.length} correct - (
+                {(score / questions.length) * 100}%)
               </h2>
               <button onClick={() => restartGame()}>Restart game</button>
             </div>
           ) : (
-            /* 5. Question Card */
             <div className="question-card">
               <h2>
-                Question: {currentQuestion + 1} out of {questionsWithRandomIds.length}
+                Question: {currentQuestion + 1} out of {questions.length}
               </h2>
-              <h3 className="question-text">{questionsWithRandomIds[currentQuestion]?.text}</h3>
-  
+              <h3 className="question-text">{questions[currentQuestion]?.text}</h3>
               <ul>
-                {questionsWithRandomIds[currentQuestion]?.options.map((option) => (
+                {questions[currentQuestion]?.options.map((option) => (
                   <li key={option.id} onClick={() => optionClicked(option.isCorrect)}>
                     {option.text}
                   </li>
@@ -161,6 +130,32 @@ function App() {
       )}
     </div>
   );
+}
+
+
+function App() {
+  const GOOGLE_SHEET_CSV_URL_1 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzzNg3HDQK3vUKpEnIwOREwa-SeRIcfYoECkL1qwivnChSUy5xrI7vE8Gpipuo_TxX6YDerL97rfGG/pub?gid=0&single=true&output=csv"; // URL for Quiz 1
+  const GOOGLE_SHEET_CSV_URL_2 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzzNg3HDQK3vUKpEnIwOREwa-SeRIcfYoECkL1qwivnChSUy5xrI7vE8Gpipuo_TxX6YDerL97rfGG/pub?gid=329704009&single=true&output=csv"; // URL for Quiz 2
+
+  return (
+    <Router basename="/airqualityquiz">
+      <div className="App">
+        <Routes>
+        <Route path="/" element={
+            <div>
+              <h1>Air Quality Quizzes</h1>
+              <Link to="/basic">Air Quality Basic Quiz</Link> <br /> {/* Link to Basic Quiz */}
+              <Link to="/advanced">Air Quality Advanced Quiz</Link> {/* Link to Advanced Quiz */}
+            </div>
+          } />
+          <Route path="/basic" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_2} quizTitle="Air Quality Basic Quiz" />} />
+          <Route path="/advanced" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_1} quizTitle="Air Quality Advanced Quiz" />} />
+          {/* Add more routes as needed */}
+        </Routes>
+      </div>
+    </Router>
+  );
+
 }
 
 export default App;
