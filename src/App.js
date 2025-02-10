@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'; // Import necessary components
+import { HashRouter as Router, Routes, Route, Link} from 'react-router-dom'; // Import necessary components
 
 // Helper function to convert CSV to questions (shared by both quizzes)
 function csvToQuestions(csvString) {
