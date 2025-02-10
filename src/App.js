@@ -7,7 +7,6 @@ function csvToQuestions(csvString) {
   const lines = csvString.trim().split("\n");
   const headers = lines[0].split(",");
   const questions = [];
-
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(",");
     const questionId = parseInt(values[0], 10);
@@ -37,7 +36,12 @@ function csvToQuestions(csvString) {
   [questions[i], questions[j]] = [questions[j], questions[i]];
   }
 
-  return questions.slice(0,10);
+  const selected_questions = questions.slice(0,10);
+  const set = selected_questions.map(question => question.id);
+
+  console.log(set);
+
+  return selected_questions;
 }
 
 // Quiz Component (reusable)
@@ -46,14 +50,16 @@ function Quiz({ googleSheetURL, quizTitle }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
-  // const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); // ✅ New state to track loading
+
 
   useEffect(() => {
     loadQuestions();
   }, [googleSheetURL]); // Add googleSheetURL as a dependency
 
   const loadQuestions = () => {
-    // setLoading(true); // Set loading to true before fetching
+    setLoading(true); // ✅ Start loading
+
     fetch(googleSheetURL, {
       headers: { "content-type": "text/csv;charset=UTF-8" },
       method: "GET",
@@ -67,12 +73,14 @@ function Quiz({ googleSheetURL, quizTitle }) {
       .then((csvData) => {
         const data = csvToQuestions(csvData);
         setQuestions(data);
-        // setLoading(false); // Set loading to false after successful fetch
+        setLoading(false); // ✅ Stop loading when questions are set
+
       })
       .catch((error) => {
         console.error("Error fetching CSV file:", error);
-        // setLoading(false); // Set loading to false even if there's an error
-      });
+        setLoading(false); // ✅ Stop loading even if there is an error
+
+      })
   };
 
   const optionClicked = (isCorrect) => {
@@ -92,12 +100,15 @@ function Quiz({ googleSheetURL, quizTitle }) {
     setCurrentQuestion(0);
     setShowResults(false);
     loadQuestions(); // Reload questions to shuffle
+        
   };
 
   return (
     <div className="quiz-container"> {/* Add a class for styling */}
       <h1>{quizTitle}</h1> {/* Display the quiz title */}
-      {questions.length === 0 ? (
+      <p> Each quiz has 10 questions selected from a larger pool of questions.
+        Participants are encouraged to take the test multiple times</p>
+      {(loading) ? (
         <h2>Loading quiz...</h2>
       ) : (
         <>
@@ -138,7 +149,7 @@ function App() {
   const GOOGLE_SHEET_CSV_URL_2 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzzNg3HDQK3vUKpEnIwOREwa-SeRIcfYoECkL1qwivnChSUy5xrI7vE8Gpipuo_TxX6YDerL97rfGG/pub?gid=329704009&single=true&output=csv"; // URL for Quiz 2
 
   return (
-    <Router basename="/airqualityquiz">
+    <Router>
       <div className="App">
         <Routes>
         <Route path="/" element={
