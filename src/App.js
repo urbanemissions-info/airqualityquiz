@@ -120,8 +120,10 @@ function Quiz({ googleSheetURL, quizTitle }) {
                 {score} out of {questions.length} correct - (
                 {(score / questions.length) * 100}%)
               </h2>
-              <button onClick={() => restartGame()}>Restart game</button>
+              <button onClick={() => restartGame()}>Restart game</button> <br></br>
+              <Link to="/"><button>Home</button></Link> <br /> {/* Link to Home */}
             </div>
+            
           ) : (
             <div className="question-card">
               <h2>

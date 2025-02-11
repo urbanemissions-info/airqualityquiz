@@ -59,7 +59,7 @@ li {
 }
 
 button {
-  background-color: red; /* Green */
+  background-color: rgb(23, 81,18);
   border: none;
   color: white;
   padding: 16px 24px;
@@ -68,6 +68,6 @@ button {
   display: inline-block;
   font-size: 16px;
   font-weight: bold;
-
   border-radius: 24px;
+  margin-top: 8px;
 }
