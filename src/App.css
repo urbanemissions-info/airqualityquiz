@@ -71,3 +71,22 @@ button {
   border-radius: 24px;
   margin-top: 8px;
 }
+.disabled {
+  pointer-events: none; /* Disable clicks */
+  opacity: 0.6; /* Make it look disabled */
+  cursor: default; /* Change cursor */
+}
+.feedback {
+  /* Center the div  */
+  margin: 0 auto;
+  /* Dimensions  */
+  width: 70%; /* Can be in percentage also. */
+  height: auto;
+
+  /* Visual  */
+  background-color: rgb(212, 220, 154);
+  padding: 16px;
+  border-radius: 16px;
+  color: rgb(0, 0, 0);
+  margin-top: 10px;
+}

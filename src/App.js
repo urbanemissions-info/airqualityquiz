@@ -27,6 +27,7 @@ function csvToQuestions(csvString) {
       id: questionId,
       text: questionText,
       options: options,
+      answer_explanation: values[7]
     });
   }
 
@@ -38,9 +39,7 @@ function csvToQuestions(csvString) {
 
   const selected_questions = questions.slice(0,10);
   const set = selected_questions.map(question => question.id);
-
-  console.log(set);
-
+  // console.log(set);
   return selected_questions;
 }
 
@@ -51,7 +50,9 @@ function Quiz({ googleSheetURL, quizTitle }) {
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(true); // ✅ New state to track loading
-
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [feedback, setFeedback] = useState(null);
+  const [showNextButton, setShowNextButton] = useState(false); // New state for button visibility
 
   useEffect(() => {
     loadQuestions();
@@ -83,17 +84,52 @@ function Quiz({ googleSheetURL, quizTitle }) {
       })
   };
 
-  const optionClicked = (isCorrect) => {
-    if (isCorrect) {
-      setScore(score + 1);
-    }
+  const optionClicked = (isCorrect, option, correctAnswerText, answerExplanationText) => {
+    
+      if (isCorrect) {
+        if (!selectedOption) { // Only allow click if no option is selected yet
+          setScore(score + 1);
+        }
+        setFeedback("Correct :) !");
+      } else {setFeedback("Incorrect :( ");}  
+    setSelectedOption(option);
+    // console.log(option);
+    setShowNextButton(true); // Show the "Next Question" button
 
-    if (currentQuestion + 1 < questions.length) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowResults(true);
-    }
+
+  //   setTimeout(() => {  // Use setTimeout for the delay
+  //     if (currentQuestion + 1 < questions.length) {
+  //         setCurrentQuestion(currentQuestion + 1);
+  //         setSelectedOption(null); // Reset selected option for next question
+  //         setFeedback(null); // Reset feedback
+  //     } else {
+  //         setShowResults(true);
+  //     }
+      
+  // }, 5000); // 5000 milliseconds = 5 seconds
+
+    // if (currentQuestion + 1 < questions.length) {
+    //   setCurrentQuestion(currentQuestion + 1);
+    // } else {
+    //   setShowResults(true);
+    // }
+
+    // setSelectedOption(option);
   };
+
+  const goToNextQuestion = () => {
+    if (currentQuestion + 1 < questions.length) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedOption(null);
+        setFeedback(null);
+        setShowNextButton(false); // Hide the button
+    } else {
+        setShowResults(true);
+        setFeedback(null);
+        setShowNextButton(false);
+    }
+};
+
 
   const restartGame = () => {
     setScore(0);
@@ -132,13 +168,28 @@ function Quiz({ googleSheetURL, quizTitle }) {
               <h3 className="question-text">{questions[currentQuestion]?.text}</h3>
               <ul>
                 {questions[currentQuestion]?.options.map((option) => (
-                  <li key={option.id} onClick={() => optionClicked(option.isCorrect)}>
+                  <li key={option.id} onClick={() => (optionClicked(option.isCorrect,
+                                                                              option,
+                                                                              questions[currentQuestion]?.options.find(opt => opt.isCorrect)?.text,
+                                                                              questions[currentQuestion]?.answer_explanation))}>
                     {option.text}
                   </li>
                 ))}
               </ul>
             </div>
           )}
+           {/* Feedback */}
+          {feedback && (
+              <div className="feedback">
+                  <p>{feedback}</p>
+                  <p>Correct Answer: {questions[currentQuestion]?.options.find(opt => opt.isCorrect)?.text}</p>
+                  <p>{questions[currentQuestion]?.answer_explanation}</p>
+              </div>
+          )}
+          {/* Next Question Button */}
+          {showNextButton && ( // Show the button only when showNextButton is true
+                <button onClick={goToNextQuestion}>Next Question</button>
+            )}
         </>
       )}
     </div>

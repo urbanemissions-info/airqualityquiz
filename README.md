@@ -21,7 +21,7 @@ Answer the quiz on: [AirQualityQuiz](https://urbanemissions-info.github.io/airqu
 
 - [x] After game reset, **scramble order of questions** randomly
 - [ ] Collect scores
-- [ ] After clicking an option, pause for 2 sec, show correct answer, then move onto next one
+- [x] After clicking an option, show correct answer, then move onto next one (button or pause for 5 seconds)
 - [ ] At the end show list of wrong questions with the correct answers
 - [ ] Create different ReactJS components
 
