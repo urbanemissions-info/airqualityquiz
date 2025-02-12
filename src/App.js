@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { HashRouter as Router, Routes, Route, Link} from 'react-router-dom'; // Import necessary components
+import axios from 'axios';
 
 // Helper function to convert CSV to questions (shared by both quizzes)
 function csvToQuestions(csvString) {
@@ -9,7 +10,7 @@ function csvToQuestions(csvString) {
   const questions = [];
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(",");
-    const questionId = parseInt(values[0], 10);
+    const questionId = values[0];
     const questionText = values[1];
     const obj = { a: 2, b: 3, c: 4, d: 5 };
     const correctAnswerIndex = obj[values[6].replace("\r", "")]; // Assuming 'correct_ans' is at index 6
@@ -38,8 +39,6 @@ function csvToQuestions(csvString) {
   }
 
   const selected_questions = questions.slice(0,10);
-  const set = selected_questions.map(question => question.id);
-  // console.log(set);
   return selected_questions;
 }
 
@@ -53,6 +52,9 @@ function Quiz({ googleSheetURL, quizTitle }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [feedback, setFeedback] = useState(null);
   const [showNextButton, setShowNextButton] = useState(false); // New state for button visibility
+  const [responses, setResponses] = useState([]); // New state to store responses
+  const [qids, setQids] = useState([]); // New state to store responses
+
 
   useEffect(() => {
     loadQuestions();
@@ -75,7 +77,8 @@ function Quiz({ googleSheetURL, quizTitle }) {
         const data = csvToQuestions(csvData);
         setQuestions(data);
         setLoading(false); // ✅ Stop loading when questions are set
-
+        const question_ids = data.map(question => question.id);
+        setQids(() => question_ids);  // Correct Way to Update State based on previous value.
       })
       .catch((error) => {
         console.error("Error fetching CSV file:", error);
@@ -84,8 +87,13 @@ function Quiz({ googleSheetURL, quizTitle }) {
       })
   };
 
+  useEffect(() => {
+    console.log("qids in useEffect:", qids); // Correct: Shows the updated array
+}, [qids]); // This useEffect runs whenever qids changes
+
+
   const optionClicked = (isCorrect, option, correctAnswerText, answerExplanationText) => {
-    
+    responses.push(option.id);
       if (isCorrect) {
         if (!selectedOption) { // Only allow click if no option is selected yet
           setScore(score + 1);
@@ -93,7 +101,6 @@ function Quiz({ googleSheetURL, quizTitle }) {
         setFeedback("Correct :) !");
       } else {setFeedback("Incorrect :( ");}  
     setSelectedOption(option);
-    // console.log(option);
     setShowNextButton(true); // Show the "Next Question" button
 
 
@@ -123,15 +130,54 @@ function Quiz({ googleSheetURL, quizTitle }) {
         setSelectedOption(null);
         setFeedback(null);
         setShowNextButton(false); // Hide the button
+        // console.log(responses);
     } else {
+            
+        saveScore();
         setShowResults(true);
         setFeedback(null);
         setShowNextButton(false);
     }
 };
 
+const saveScore = async () => {
+  console.log(qids);
+  try {
+      const scoreData = {
+          quizName: quizTitle, // The quiz title
+          score: score, // The user's score
+          date: new Date().toISOString(), // Current date and time in ISO 8601 format (important!)
+          question_ids: qids,
+          responses: responses,
+      };
 
-  const restartGame = () => {
+      const response = await axios.post('http://127.0.0.1:8000/api/saveScore', scoreData); // Or your full URL if deployed
+
+      console.log('Score saved successfully:', response.data); // Log the response from the server
+      // Optionally, you can show a success message to the user here
+  } catch (error) {
+      console.error('Error saving score:', error);
+      // Display an error message to the user
+      if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.error("Request:", error.request);
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error message:", error.message);
+      }
+
+  }
+};
+
+const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
     setShowResults(false);
@@ -149,7 +195,7 @@ function Quiz({ googleSheetURL, quizTitle }) {
       ) : (
         <>
           <h2>Score: {score}</h2>
-          {showResults ? (
+          {showResults ? ( 
             <div className="final-results">
               <h1>Final Results</h1>
               <h2>

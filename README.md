@@ -1,6 +1,6 @@
 # Multiple Choice Quiz (ReactJS)
 
-Answer the quiz on: [AirQualityQuiz](https://urbanemissions-info.github.io/airqualityquiz/)
+Answer the quiz on: [AirQualityQuiz](https://urbanemissionsinfo.github.io/airqualityquiz/)
 
 ![alt text](image.png)
 
@@ -20,10 +20,10 @@ Answer the quiz on: [AirQualityQuiz](https://urbanemissions-info.github.io/airqu
 ### Medium 🟡
 
 - [x] After game reset, **scramble order of questions** randomly
-- [ ] Collect scores
 - [x] After clicking an option, show correct answer, then move onto next one (button or pause for 5 seconds)
 - [ ] At the end show list of wrong questions with the correct answers
 - [ ] Create different ReactJS components
 
-### Hard 🔴 
-- [] Create a **live leaderboard** of users using a backend (Firebase, AWS, etc.)
+### Hard 🔴 - requires backend.
+- [x] Collect scores - total and questionwise.
+- [ ] Create a **live leaderboard** of users 
