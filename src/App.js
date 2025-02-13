@@ -151,7 +151,7 @@ const saveScore = async () => {
           responses: responses,
       };
 
-      const response = await axios.post('http://127.0.0.1:8000/api/saveScore', scoreData); // Or your full URL if deployed
+      const response = await axios.post('https://airqualityquiz-backend.onrender.com/api/saveScore', scoreData); // Or your full URL if deployed
 
       console.log('Score saved successfully:', response.data); // Log the response from the server
       // Optionally, you can show a success message to the user here
