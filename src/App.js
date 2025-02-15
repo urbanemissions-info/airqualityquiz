@@ -255,11 +255,11 @@ function App() {
             <div>
               <h1>Air Quality Quizzes</h1>
               <Link to="/basic">Air Quality Basic Quiz</Link> <br /> {/* Link to Basic Quiz */}
-              <Link to="/advanced">Air Quality Advanced Quiz</Link> {/* Link to Advanced Quiz */}
+              <Link to="/">Air Quality Advanced Quiz (Coming soon...) </Link> {/* Link to Advanced Quiz */}
             </div>
           } />
           <Route path="/basic" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_2} quizTitle="Air Quality Basic Quiz" />} />
-          <Route path="/advanced" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_1} quizTitle="Air Quality Advanced Quiz" />} />
+          {/* <Route path="/advanced" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_1} quizTitle="Air Quality Advanced Quiz" />} /> */}
           {/* Add more routes as needed */}
         </Routes>
       </div>
