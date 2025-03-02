@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/airqualityquiz/static/css/main.27376d50.css",
-    "main.js": "/airqualityquiz/static/js/main.75347ee4.js",
+    "main.js": "/airqualityquiz/static/js/main.13cbd85f.js",
     "index.html": "/airqualityquiz/index.html",
     "main.27376d50.css.map": "/airqualityquiz/static/css/main.27376d50.css.map",
-    "main.75347ee4.js.map": "/airqualityquiz/static/js/main.75347ee4.js.map"
+    "main.13cbd85f.js.map": "/airqualityquiz/static/js/main.13cbd85f.js.map"
   },
   "entrypoints": [
     "static/css/main.27376d50.css",
-    "static/js/main.75347ee4.js"
+    "static/js/main.13cbd85f.js"
   ]
 }
