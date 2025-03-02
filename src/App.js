@@ -188,7 +188,7 @@ const restartGame = () => {
   return (
     <div className="quiz-container"> {/* Add a class for styling */}
       <h1>{quizTitle}</h1> {/* Display the quiz title */}
-      <p> Each quiz has 10 questions selected from a larger pool of questions.
+      <p> Each quiz has 10 questions selected from a pool of questions.
         Participants are encouraged to take the test multiple times</p>
       {(loading) ? (
         <h2>Loading quiz...</h2>
@@ -254,11 +254,11 @@ function App() {
         <Route path="/" element={
             <div>
               <h1>Air Quality Quizzes</h1>
-              <Link to="/basic">Air Quality Basic Quiz</Link> <br /> {/* Link to Basic Quiz */}
+              <Link to="/basic">Air Quality Basics Quiz</Link> <br /> {/* Link to Basic Quiz */}
               <Link to="/">Air Quality Advanced Quiz (Coming soon...) </Link> {/* Link to Advanced Quiz */}
             </div>
           } />
-          <Route path="/basic" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_2} quizTitle="Air Quality Basic Quiz" />} />
+          <Route path="/basic" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_2} quizTitle="Air Quality Basics Quiz" />} />
           {/* <Route path="/advanced" element={<Quiz googleSheetURL={GOOGLE_SHEET_CSV_URL_1} quizTitle="Air Quality Advanced Quiz" />} /> */}
           {/* Add more routes as needed */}
         </Routes>
