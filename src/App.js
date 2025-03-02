@@ -53,7 +53,7 @@ function Quiz({ googleSheetURL, quizTitle }) {
   const [feedback, setFeedback] = useState(null);
   const [showNextButton, setShowNextButton] = useState(false); // New state for button visibility
   const [responses, setResponses] = useState([]); // New state to store responses
-  const [qids, setQids] = useState([]); // New state to store responses
+  const [qids, setQids] = useState([]); // New state to store question IDs
 
 
   useEffect(() => {
@@ -93,14 +93,17 @@ function Quiz({ googleSheetURL, quizTitle }) {
 
 
   const optionClicked = (isCorrect, option, correctAnswerText, answerExplanationText) => {
+    if (!selectedOption) {
     responses.push(option.id);
+    }
       if (isCorrect) {
         if (!selectedOption) { // Only allow click if no option is selected yet
           setScore(score + 1);
+          setFeedback("Correct :) !");
         }
-        setFeedback("Correct :) !");
       } else {setFeedback("Incorrect :( ");}  
     setSelectedOption(option);
+    console.log(responses);
     setShowNextButton(true); // Show the "Next Question" button
 
 
